@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>webe.media – Christi Himmelfahrt 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
+ 
   body {
     background: #111;
     display: flex;
@@ -17,7 +16,8 @@
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
   }
-
+ 
+  /* ── POST ─────────────────────────────── */
   .post {
     width: 800px;
     height: 1000px;
@@ -26,8 +26,8 @@
     background: #020a11;
     flex-shrink: 0;
   }
-
-  /* ── BACKGROUND ───────────────────── */
+ 
+  /* ── NOISE TEXTURE ────────────────────── */
   .bg-noise {
     position: absolute;
     inset: 0;
@@ -36,7 +36,8 @@
     background-size: 256px 256px;
     z-index: 1;
   }
-
+ 
+  /* ── GLOWS ────────────────────────────── */
   .glow-yellow {
     position: absolute;
     top: -160px;
@@ -47,7 +48,6 @@
     background: radial-gradient(circle, rgba(194,209,8,0.18) 0%, transparent 65%);
     z-index: 1;
   }
-
   .glow-blue {
     position: absolute;
     bottom: -120px;
@@ -58,7 +58,8 @@
     background: radial-gradient(circle, rgba(194,209,8,0.07) 0%, transparent 70%);
     z-index: 1;
   }
-
+ 
+  /* ── GRID ─────────────────────────────── */
   .grid {
     position: absolute;
     inset: 0;
@@ -68,17 +69,121 @@
     background-size: 100px 100px;
     z-index: 2;
   }
-
-  /* ── CENTER BLOCK ───────────────────── */
+ 
+  /* ── CORNER MARKERS ───────────────────── */
+  .corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    z-index: 10;
+  }
+  .corner::before, .corner::after {
+    content: '';
+    position: absolute;
+    background: rgba(194,209,8,0.4);
+  }
+  .corner::before { width: 1px; height: 100%; left: 0; top: 0; }
+  .corner::after  { height: 1px; width: 100%; top: 0; left: 0; }
+ 
+  .c-tl { top: 44px; left: 44px; }
+  .c-tr { top: 44px; right: 44px; transform: scaleX(-1); }
+  .c-bl { bottom: 44px; left: 44px; transform: scaleY(-1); }
+  .c-br { bottom: 44px; right: 44px; transform: scale(-1); }
+ 
+  /* ── TOP BAR ──────────────────────────── */
+  .top-bar {
+    position: absolute;
+    top: 52px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 20;
+  }
+ 
+  .logo-img {
+    height: 30px;
+    width: auto;
+    object-fit: contain;
+  }
+ 
+  .date-pill {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(194,209,8,0.7);
+    border: 1px solid rgba(194,209,8,0.25);
+    padding: 7px 15px;
+    border-radius: 2px;
+  }
+ 
+  /* ── DECO LARGE NUMBER ────────────────── */
+  .deco-number {
+    position: absolute;
+    bottom: 80px;
+    right: -20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 380px;
+    line-height: 1;
+    color: rgba(194,209,8,0.05);
+    letter-spacing: -10px;
+    z-index: 3;
+    user-select: none;
+    pointer-events: none;
+  }
+ 
+  /* ── HORIZONTAL LINES ─────────────────── */
+  .h-line {
+    position: absolute;
+    height: 1px;
+    z-index: 5;
+  }
+  .h-line-top {
+    width: 280px;
+    top: 100px;
+    left: 60px;
+    background: linear-gradient(90deg, rgba(194,209,8,0.5), transparent);
+  }
+  .h-line-mid {
+    width: 100%;
+    left: 0;
+    top: 48%;
+    background: rgba(255,255,255,0.05);
+  }
+  .h-line-short {
+    width: 80px;
+    bottom: 130px;
+    right: 60px;
+    background: rgba(194,209,8,0.35);
+  }
+ 
+  /* ── VERTICAL TEXT ────────────────────── */
+  .vertical-text {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.1);
+    z-index: 10;
+  }
+ 
+  /* ── CENTER QUOTE ─────────────────────── */
   .center-block {
     position: absolute;
     top: 50%;
     left: 60px;
-    transform: translateY(-62%);
+    transform: translateY(-58%);
     z-index: 10;
     max-width: 520px;
   }
-
+ 
   .cb-label {
     font-size: 9px;
     font-weight: 600;
@@ -90,14 +195,14 @@
     align-items: center;
     gap: 10px;
   }
-
   .cb-label::before {
     content: '';
+    display: inline-block;
     width: 28px;
     height: 1px;
     background: #c2d108;
   }
-
+ 
   .cb-text {
     font-size: 17px;
     font-weight: 300;
@@ -105,13 +210,24 @@
     color: rgba(255,255,255,0.5);
     max-width: 380px;
   }
-
   .cb-text strong {
     color: #fff;
     font-weight: 500;
   }
-
-  /* ── BOTTOM CONTENT ────────────────── */
+ 
+  /* ── YELLOW ACCENT BAR ────────────────── */
+  .accent-bar {
+    position: absolute;
+    left: 0;
+    top: 48%;
+    width: 5px;
+    height: 80px;
+    background: #c2d108;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+ 
+  /* ── BOTTOM CONTENT ───────────────────── */
   .content {
     position: absolute;
     bottom: 0;
@@ -120,26 +236,29 @@
     padding: 0 60px 58px;
     z-index: 20;
   }
-
+ 
   .eyebrow {
     font-size: 10px;
+    font-weight: 500;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: rgba(255,255,255,0.3);
     margin-bottom: 18px;
   }
-
+ 
   .headline {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 128px;
     line-height: 0.88;
     color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
   }
-
+ 
   .headline .accent {
     color: #c2d108;
   }
-
+ 
   .subline {
     font-size: 13px;
     font-weight: 300;
@@ -148,21 +267,25 @@
     max-width: 380px;
     margin-bottom: 42px;
   }
-
+ 
+  /* ── BOTTOM ROW ───────────────────────── */
   .bottom-row {
     display: flex;
+    align-items: center;
     justify-content: space-between;
   }
-
+ 
   .handle {
     font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
     color: rgba(255,255,255,0.22);
   }
-
   .handle strong {
     color: rgba(255,255,255,0.55);
+    font-weight: 500;
   }
-
+ 
   .badge {
     display: flex;
     align-items: center;
@@ -172,52 +295,67 @@
     border-radius: 100px;
     background: rgba(194,209,8,0.06);
   }
-
   .badge-dot {
     width: 5px;
     height: 5px;
     border-radius: 50%;
     background: #c2d108;
-    animation: blink 2.5s infinite;
+    animation: blink 2.5s ease-in-out infinite;
   }
-
   @keyframes blink {
+    0%, 100% { opacity: 1; }
     50% { opacity: 0.25; }
   }
-
   .badge-text {
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: rgba(194,209,8,0.7);
   }
-
-  /* ── VERTICAL TEXT ─────────────────── */
-  .vertical-text {
-    position: absolute;
-    right: 60px;
-    top: 45%;
-    transform: translateY(-50%) rotate(180deg);
-    writing-mode: vertical-rl;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.1);
-    z-index: 10;
-  }
-
+ 
 </style>
 </head>
-
 <body>
 <div class="post">
-
+ 
+  <!-- Layers -->
   <div class="bg-noise"></div>
   <div class="glow-yellow"></div>
   <div class="glow-blue"></div>
   <div class="grid"></div>
-
+ 
+  <!-- Corners -->
+  <div class="corner c-tl"></div>
+  <div class="corner c-tr"></div>
+  <div class="corner c-bl"></div>
+  <div class="corner c-br"></div>
+ 
+  <!-- Lines -->
+  <div class="h-line h-line-top"></div>
+  <div class="h-line h-line-mid"></div>
+  <div class="h-line h-line-short"></div>
+ 
+  <!-- Yellow left bar -->
+  <div class="accent-bar"></div>
+ 
+  <!-- Deco number -->
+  <div class="deco-number">14</div>
+ 
+  <!-- Vertical side label -->
+  <div class="vertical-text">Full-Service Agentur · Rhede · 2026</div>
+ 
+  <!-- Top bar -->
+  <div class="top-bar">
+    <img
+      class="logo-img"
+      src="https://webe.media/wp-content/uploads/2025/11/WEBE-Media-Logo-Light_RGB-1.svg"
+      alt="webe Media"
+      onerror="this.style.display='none'"
+    />
+    <div class="date-pill">14. Mai 2026</div>
+  </div>
+ 
+  <!-- Center quote block -->
   <div class="center-block">
     <div class="cb-label">Christi Himmelfahrt</div>
     <div class="cb-text">
@@ -226,11 +364,8 @@
       Heute gönnen wir uns genau das.
     </div>
   </div>
-
-  <div class="vertical-text">
-    Full-Service Agentur · Rhede · 2026
-  </div>
-
+ 
+  <!-- Bottom content -->
   <div class="content">
     <div class="eyebrow">Schönen Feiertag</div>
     <div class="headline">
@@ -238,9 +373,8 @@
     </div>
     <div class="subline">
       Wir wünschen euch einen erholsamen Feiertag —<br>
-      ab Montag sind wir wieder voll für Sie da.
+      ab Montag sind wir wieder voll für euch da.
     </div>
-
     <div class="bottom-row">
       <div class="handle"><strong>@webe_media</strong> · webe.media</div>
       <div class="badge">
@@ -248,9 +382,9 @@
         <div class="badge-text">Feiertag</div>
       </div>
     </div>
-
   </div>
-
+ 
 </div>
 </body>
 </html>
+ 
