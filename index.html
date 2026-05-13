@@ -27,6 +27,7 @@
     flex-shrink: 0;
   }
 
+  /* ── BACKGROUND ───────────────────── */
   .bg-noise {
     position: absolute;
     inset: 0;
@@ -68,6 +69,7 @@
     z-index: 2;
   }
 
+  /* ── CENTER BLOCK ───────────────────── */
   .center-block {
     position: absolute;
     top: 50%;
@@ -109,6 +111,7 @@
     font-weight: 500;
   }
 
+  /* ── BOTTOM CONTENT ────────────────── */
   .content {
     position: absolute;
     bottom: 0;
@@ -189,6 +192,21 @@
     color: rgba(194,209,8,0.7);
   }
 
+  /* ── VERTICAL TEXT ─────────────────── */
+  .vertical-text {
+    position: absolute;
+    right: 60px;
+    top: 45%;
+    transform: translateY(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.1);
+    z-index: 10;
+  }
+
 </style>
 </head>
 
@@ -207,6 +225,10 @@
       <strong>einfach durchzuatmen.</strong><br>
       Heute gönnen wir uns genau das.
     </div>
+  </div>
+
+  <div class="vertical-text">
+    Full-Service Agentur · Rhede · 2026
   </div>
 
   <div class="content">
